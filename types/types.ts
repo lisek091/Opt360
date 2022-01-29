@@ -10,7 +10,7 @@ type info = {
     version:string
 }
 
-type results = {
+export type results = {
     cell:string,
     dob:{
         age:number,
