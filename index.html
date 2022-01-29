@@ -13,6 +13,11 @@
     />
     <script type="text/javascript" src="./scripts/main.js"></script>
     <script type="text/javascript" src="./jquery-3.6.0.min.js"></script>
+    <script
+      type="text/javascript"
+      src="http://www.chartjs.org/assets/Chart.js"
+    ></script>
+    <script src="require.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
   </head>
   <body>
@@ -31,38 +36,13 @@
         </div>
         <div class="content">
           <h1 class="placeholder">PlaceHolder</h1>
-          <div class="wykres">Wykres</div>
+          <div class="wykres">
+            <canvas id="myChart" width="400" height="400"></canvas>
+          </div>
+          <div id="loading"></div>
           <div class="tabWraper" id="tabWrap">
             <div class="tabela" id="tablica">Tabela z danymi</div>
-            <table id="mainTab" class="mainTab">
-              <tr>
-                <th>Imie</th>
-                <th>Nazwisko</th>
-                <th>Wiek</th>
-                <th>Miasto</th>
-                <th>Ulica</th>
-                <th>Telefon</th>
-                <th>Emial</th>
-              </tr>
-              <tr>
-                <td>Lis</td>
-                <td>tesdsat2</td>
-                <td>45</td>
-                <td>troti</td>
-                <td>dwas</td>
-                <td>4124312</td>
-                <td>@fsa</td>
-              </tr>
-              <tr>
-                <td>Lis</td>
-                <td>tesdsat2</td>
-                <td>45</td>
-                <td>troti</td>
-                <td>dwas</td>
-                <td>4124312</td>
-                <td>@fsa</td>
-              </tr>
-            </table>
+            <table id="mainTab" class="mainTab"></table>
           </div>
         </div>
         <button class="getData" onclick="wypisanie()">Get data</button>

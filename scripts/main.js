@@ -17,15 +17,17 @@ function getData() {
     });
 }
 async function wypisanie() {
+    document.getElementById("loading").innerHTML = `<img class="gif" src="./styles/spinner.gif"/>`;
     let data;
     try {
         data = await getData();
+        const starzy = tabela(data);
+        lista(starzy);
     }
     catch (error) {
         console.log(error);
     }
-    const starzy = tabela(data);
-    lista(starzy);
+    document.getElementById("loading").innerHTML = "";
 }
 function tabela(data) {
     const arrmax = data.results.map((user) => {
@@ -65,16 +67,16 @@ function lista(data) {
             `;
     });
     let firstRow = `
-    <tr>
-    <th>Imie</th>
-    <th>Nazwisko</th>
-    <th>Wiek</th>
-    <th>Miasto</th>
-    <th>Ulica</th>
-    <th>Telefon</th>
-    <th>Emial</th>
-    </tr>
-    `;
+        <tr>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Wiek</th>
+            <th>Miasto</th>
+            <th>Ulica</th>
+            <th>Telefon</th>
+            <th>Emial</th>
+        </tr>
+        `;
     let combinedTable = firstRow + dataRows;
     document.getElementById('mainTab').innerHTML = combinedTable;
 }
