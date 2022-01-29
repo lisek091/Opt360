@@ -1,5 +1,5 @@
 import { dataType, results } from "./types/types";
-import { Chart, registerables } from 'chart.js';
+import { Chart, registerables, ScatterDataPoint } from 'chart.js';
 Chart.register(...registerables);
 function getData() {
     return new Promise((resolve) => {
@@ -19,40 +19,57 @@ function getData() {
 
     })
 }
-function zrobcos() {
-    /*
-        let ctx = document.getElementById('myChart') as HTMLCanvasElement
-        const data = {
-            labels: ['20-30', '30-40'],
+function zrobcos(data: dataType) {
+    let ageArray = [0, 0, 0, 0, 0, 0]
+    data.results.map((user) => {
+        if (user.dob.age >= 20 && user.dob.age < 30) { ageArray[0] = ageArray[0] + 1 }
+        if (user.dob.age >= 30 && user.dob.age < 40) { ageArray[1] = ageArray[1] + 1 }
+        if (user.dob.age >= 40 && user.dob.age < 50) { ageArray[2] = ageArray[2] + 1 }
+        if (user.dob.age >= 50 && user.dob.age < 60) { ageArray[3] = ageArray[3] + 1 }
+        if (user.dob.age >= 60 && user.dob.age < 70) { ageArray[4] = ageArray[4] + 1 }
+        if (user.dob.age >= 70 && user.dob.age < 80) { ageArray[5] = ageArray[5] + 1 }
+    })
+
+    var ctx = document.getElementById("myChart").getContext('2d')
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['20-29', '30-39', '40-49', '50-59', '60-69', '70-79'],
             datasets: [{
-                label: 'My First dataset',
-                data: [0, 10],
-                //   backgroundColor: 'rgb(255, 99, 132)',
-                //  borderColor: 'rgb(255, 99, 132)',
+                label: 'Osób w wieku',
+                data: [ageArray[0], ageArray[1], ageArray[2], ageArray[3], ageArray[4], ageArray[5]],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
             }]
-        };
-        const config: any = {
-            type: 'bar',
-            data,
-            options: {}
-        };
-        //let ctx = canvas.getContext('2d')
-        new Chart(ctx, config);
-        */
-    var canva = document.getElementById("myChart") as HTMLCanvasElement
-    var ctx = canva.getContext('2d')
-    var data: any = {
-        labels: ["Group 1", "Group 2", "Group 3"],
-        datasets: [{
-            label: "Group",
-            data: [12, 19, 3]
-        }],
-        arguments: {}
-    };
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 400
+                }
+            }
+        }
+    });
 
-    var myNewChart = new Chart(ctx!, data);
+
+
 }
-
 
 
 function tabela(data: dataType) {
@@ -114,9 +131,7 @@ async function wypisanie() {
         data = await getData()
         const starzy = tabela(data)
         lista(starzy)
-        zrobcos()
-
-
+        zrobcos(data)
     }
     catch (error) {
         console.log(error)
