@@ -19,28 +19,39 @@ function getData() {
 
     })
 }
-
 function zrobcos() {
-
-    let ctx = document.getElementById('myChart') as HTMLCanvasElement
-    const data = {
-        labels: ['20-30', '30-40'],
+    /*
+        let ctx = document.getElementById('myChart') as HTMLCanvasElement
+        const data = {
+            labels: ['20-30', '30-40'],
+            datasets: [{
+                label: 'My First dataset',
+                data: [0, 10],
+                //   backgroundColor: 'rgb(255, 99, 132)',
+                //  borderColor: 'rgb(255, 99, 132)',
+            }]
+        };
+        const config: any = {
+            type: 'bar',
+            data,
+            options: {}
+        };
+        //let ctx = canvas.getContext('2d')
+        new Chart(ctx, config);
+        */
+    var canva = document.getElementById("myChart") as HTMLCanvasElement
+    var ctx = canva.getContext('2d')
+    var data: any = {
+        labels: ["Group 1", "Group 2", "Group 3"],
         datasets: [{
-            label: 'My First dataset',
-            data: [0, 10],
-            //   backgroundColor: 'rgb(255, 99, 132)',
-            //  borderColor: 'rgb(255, 99, 132)',
-        }]
+            label: "Group",
+            data: [12, 19, 3]
+        }],
+        arguments: {}
     };
-    const config: any = {
-        type: 'bar',
-        data,
-        options: {}
-    };
-    //let ctx = canvas.getContext('2d')
-    const chart = new Chart(ctx, config);
-}
 
+    var myNewChart = new Chart(ctx!, data);
+}
 
 
 
@@ -63,12 +74,11 @@ function tabela(data: dataType) {
         }
     }
     let finalArr = newArr.slice(0, 10)
-    console.log(finalArr)
     return finalArr
 }
 
 function lista(data: results) {
-    let dataRows: string
+    let dataRows: string = ""
     data.map((user) => {
         dataRows = dataRows + `
         <tr>
@@ -95,7 +105,6 @@ function lista(data: results) {
     </tr>
     `
     let combinedTable = firstRow + dataRows!
-
     document.getElementById('mainTab')!.innerHTML = combinedTable
 }
 async function wypisanie() {
@@ -106,11 +115,12 @@ async function wypisanie() {
         const starzy = tabela(data)
         lista(starzy)
         zrobcos()
+
+
     }
     catch (error) {
         console.log(error)
     }
     document.getElementById("loading")!.innerHTML = ""
-
 
 }

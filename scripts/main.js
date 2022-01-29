@@ -19,23 +19,36 @@ function getData() {
     });
 }
 function zrobcos() {
-    let ctx = document.getElementById('myChart');
-    const data = {
-        labels: ['20-30', '30-40'],
-        datasets: [{
+    /*
+        let ctx = document.getElementById('myChart') as HTMLCanvasElement
+        const data = {
+            labels: ['20-30', '30-40'],
+            datasets: [{
                 label: 'My First dataset',
                 data: [0, 10],
                 //   backgroundColor: 'rgb(255, 99, 132)',
                 //  borderColor: 'rgb(255, 99, 132)',
             }]
+        };
+        const config: any = {
+            type: 'bar',
+            data,
+            options: {}
+        };
+        //let ctx = canvas.getContext('2d')
+        new Chart(ctx, config);
+        */
+    var canva = document.getElementById("myChart");
+    var ctx = canva.getContext('2d');
+    var data = {
+        labels: ["Group 1", "Group 2", "Group 3"],
+        datasets: [{
+                label: "Group",
+                data: [12, 19, 3]
+            }],
+        arguments: {}
     };
-    const config = {
-        type: 'bar',
-        data,
-        options: {}
-    };
-    //let ctx = canvas.getContext('2d')
-    const chart = new chart_js_1.Chart(ctx, config);
+    var myNewChart = new chart_js_1.Chart(ctx, data);
 }
 function tabela(data) {
     const arrmax = data.results.map((user) => {
@@ -56,11 +69,10 @@ function tabela(data) {
         }
     }
     let finalArr = newArr.slice(0, 10);
-    console.log(finalArr);
     return finalArr;
 }
 function lista(data) {
-    let dataRows;
+    let dataRows = "";
     data.map((user) => {
         dataRows = dataRows + `
         <tr>
