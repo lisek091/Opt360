@@ -8,46 +8,42 @@ tr {
   border: 1px solid black;
 }
 th {
-  min-width: 75px;
+  min-width: 30px;
 }
 tr:nth-child(even) {
   background-color: #d6eeee;
 }
 .box {
-  text-align: center;
+  display: grid;
+  justify-items: center;
 }
 .TextBlock {
   border: 2px solid rgb(108, 159, 207);
-  max-width: 60%;
-  margin-left: 20%;
-  margin-bottom: 10px;
+  width: 80%;
+  margin: 30px;
+  padding: 5px;
 }
 .content {
   border: 5px solid rebeccapurple;
   background-color: lightgray;
-  min-height: 700px;
-  justify-content: center;
-  width: 75%;
-  margin-left: 12.5%;
+  min-height: 750px;
+  min-width: 850px;
+  display: grid;
+  justify-items: center;
 }
 
 .placeholder {
   margin: 0;
 }
 .wykres {
-  width: 80%;
-  max-height: 400px;
-  margin-left: 10%;
+  max-height: 300px;
 }
 
 .tabWraper {
   margin-top: 25px;
-  display: grid;
 }
 .graf {
-  margin-left: 37.5%;
-  height: 40%;
-  width: 25%;
+  max-width: 400px;
 }
 
 .getData {

@@ -1,6 +1,7 @@
 import { dataType, results } from "./types/types";
 import { Chart, registerables, ScatterDataPoint } from 'chart.js';
 Chart.register(...registerables);
+//Pobieranie danych z API
 function getData() {
     return new Promise((resolve) => {
         const params = new URLSearchParams({
@@ -19,6 +20,7 @@ function getData() {
 
     })
 }
+//Rysowanie wykresu
 function zrobcos(data: dataType) {
     let ageArray = [0, 0, 0, 0, 0, 0]
     data.results.map((user) => {
@@ -71,16 +73,20 @@ function zrobcos(data: dataType) {
 
 }
 
-
+//Wybieranie 10 najstarszych osob
 function tabela(data: dataType) {
+    //najpierw wybieram tabele wiekow i sprawdzam najstarszy wiek
     const arrmax = data.results.map((user) => {
         return (user.dob.age)
     })
     const max = Math.max(...arrmax)
+    // wybieram wszystkich ktorzy sa w tym wieku
     let newArr = data.results.filter((user) => {
         return user.dob.age === max
     })
     let i = 1
+    // jesli jest mniej niz 10 to zmniejszam wiek o 1 i biore wszystkich kolejnych. Jesli nadal nie ma 10 to zmniejsza dalej o 1
+    // Uwzglednia to przypadek skrajny gdzie api poda samych 20 latkow 
     if (newArr.length < 10) {
         while (newArr.length < 10) {
             let newarr2 = data.results.filter((user) => {
@@ -90,11 +96,13 @@ function tabela(data: dataType) {
             i = i + 1
         }
     }
+    //zwraca 10 najstarszych osob
     let finalArr = newArr.slice(0, 10)
     return finalArr
 }
 
 function lista(data: results) {
+    //zwracanie tabeli osob jako string do html
     let dataRows: string = ""
     data.map((user) => {
         dataRows = dataRows + `
@@ -125,6 +133,7 @@ function lista(data: results) {
     document.getElementById('mainTab')!.innerHTML = combinedTable
 }
 async function wypisanie() {
+    // ladowanie 
     document.getElementById("loading")!.innerHTML = `<img class="gif" src="./styles/spinner.gif"/>`
     let data: any
     try {
@@ -136,6 +145,7 @@ async function wypisanie() {
     catch (error) {
         console.log(error)
     }
+
     document.getElementById("loading")!.innerHTML = ""
 
 }
